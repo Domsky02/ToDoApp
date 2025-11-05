@@ -1,100 +1,64 @@
 # Zadanie Rekrutacyjne - ToDo App
 
-# 
+Prosta aplikacja Full-Stack (CRUD) typu "ToDo List", zrealizowana w ramach zadania rekrutacyjnego.
 
-# Prosta aplikacja Full-Stack (CRUD) typu "ToDo List", zrealizowana w ramach zadania rekrutacyjnego.
+## Wymagane narzędzia
 
-# 
+* .NET 9 SDK
+* Angular CLI (v20 lub nowszy)
+* Node.js (wersja LTS)
+* Docker Desktop
 
-# Wymagane narzędzia
+-----
 
-# 
+## Instrukcja Uruchomienia
 
-# .NET 9 SDK
+### 1\. Baza Danych (Docker)
 
-# 
+Uruchom kontener PostgreSQL. Hasło (`todoapp`) jest zgodne z tym w `appsettings.json`.
 
-# Angular CLI v20.3.8
+```bash
+docker run --name todoapp-postgres -e POSTGRES_PASSWORD=todoapp -p 5432:5432 -d postgres
+```
 
-# 
+### 2\. Backend (.NET API)
 
-# Docker Desktop
+W terminalu przejdź do folderu backendu, zastosuj migracje i uruchom API.
 
-# 
+```bash
+# Wejdź do folderu backendu
+cd backend/TodoApi
 
-# Node.js (LTS)
+# Zastosuj migrację bazy
+dotnet ef database update
 
-# 
+# Uruchom API
+dotnet run
+```
 
-# Instrukcja Uruchomienia
+### 3\. Frontend (Angular)
 
-# 
+W **nowym** terminalu przejdź do folderu frontendu, zainstaluj zależności i uruchom aplikację.
 
-# 1\. Baza Danych (Docker)
+```bash
+# Wejdź do folderu frontendu
+cd frontend/TodoClient
 
-# 
+# Zainstaluj zależności
+npm install
 
-# Uruchom kontener PostgreSQL. Hasło (todoapp) jest zgodne z tym w appsettings.json.
+# Uruchom aplikację
+ng serve --open
+```
 
-# 
+Aplikacja powinna automatycznie otworzyć się w przeglądarce pod adresem `http://localhost:4200`.
 
-# docker run --name todoapp-postgres -e POSTGRES\_PASSWORD=todoapp -p 5432:5432 -d postgres
+-----
 
-# 
+## Uruchomienie Testów
 
-# 2\. Backend (.NET API)
+Aby uruchomić testy jednostkowe backendu (xUnit), wykonaj polecenie w folderze `backend/TodoApi.Tests`:
 
-# 
-
-# \# Wejdź do folderu backendu
-
-# cd backend/TodoApi
-
-# 
-
-# \# Zastosuj migrację bazy
-
-# dotnet ef database update
-
-# 
-
-# \# Uruchom API
-
-# dotnet run
-
-# 
-
-# 3\. Frontend (Angular)
-
-# 
-
-# \# Wejdź do folderu frontendu
-
-# cd frontend/TodoClient
-
-# 
-
-# \# Zainstaluj zależności
-
-# npm install
-
-# 
-
-# \# Uruchom aplikację
-
-# ng serve --open
-
-# 
-
-# Uruchomienie Testów
-
-# 
-
-# Aby uruchomić testy jednostkowe backendu (xUnit), wykonaj polecenie w folderze backend/TodoApi.Tests:
-
-# 
-
-# dotnet test
-
-
-
+```bash
+dotnet test
+```
