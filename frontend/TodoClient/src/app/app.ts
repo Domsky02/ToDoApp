@@ -14,6 +14,7 @@ export class App implements OnInit{
   protected readonly title = signal('TodoClient');
   public todoList = signal<any[]>([]);
   public newTaskTitle = signal<string>("");
+  public newTaskDescription = signal<string>("");
 
   constructor(private todo: Todo) { }
 
@@ -24,9 +25,10 @@ export class App implements OnInit{
   }
 
   addNewTask() {
-    const newTask = { tytul: this.newTaskTitle(), opis: '', czyZrobione: false };
+    const newTask = { tytul: this.newTaskTitle(), opis: this.newTaskDescription(), czyZrobione: false };
     this.todo.addTask(newTask).subscribe(result => {
       this.newTaskTitle.set('');
+      this.newTaskDescription.set('');
       this.ngOnInit();
     })
   }
